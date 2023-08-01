@@ -19,7 +19,7 @@ import * as XLSX from 'xlsx';
 
 const AdminPage = () => {
     const isLoggedIn = useSelector(selectIsLoggedIn);
-    const userid=useSelector(selectUserID)
+    const userID=useSelector(selectUserID)
     const { data, isLoading } = useFetchCollection("user_ticket_data");
        const [sort, setSort] = useState("all");
     const [search, setSearch] = useState("");
@@ -93,7 +93,7 @@ const AdminPage = () => {
 
   const deleteChc = async (id) => {
     try {
-      await deleteDoc(doc(db, "chc", id));
+      await deleteDoc(doc(db, "user_ticket_data", id));
 
       
       toast.success("Ticket deleted successfully.");
@@ -146,11 +146,11 @@ const AdminPage = () => {
                             <div>
                        <b>Customer Name:</b> {chc.customername}<br/>
                        <b>Email:</b>  {chc.email}<br/>
-                       <b>Phone Number:</b> {chc.phonenumber}<br/>
+                       <b>Phone Number:</b> {chc.Phonenumber}<br/>
                        </div>
                        <div className={styles.btnarea}>         
                         Priority: {chc.priority}<br/>
-                        <span className={userid==="mcrYtiHdAZeUTx3rrm0eIzVVrYi2"?"":styles.dnone}>
+                        <span className={userID==="mcrYtiHdAZeUTx3rrm0eIzVVrYi2"?"":styles.dnone}>
                        <Link to={`/admin-page/${chc.id}`}>
                         <FaEdit size={20} color="green" />
                       </Link>

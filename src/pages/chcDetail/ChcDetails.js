@@ -47,7 +47,7 @@ const ChcDetails = () => {
                             <div>
                        <b>Customer Name:</b> {chcData.customername}<br/>
                        <b>Email:</b>  {chcData.email}<br/>
-                       <b>Phone Number:</b> {chcData.phonenumber}<br/>
+                       <b>Phone Number:</b> {chcData.Phonenumber}<br/>
                          <b>Date Created</b>: {chcData.createdAt.toDate().toLocaleString()}<br/>
                        </div>
                        <div className={styles.btnarea}>

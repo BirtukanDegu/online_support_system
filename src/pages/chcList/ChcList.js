@@ -29,7 +29,7 @@ const ChcList = () => {
     // Pagination states
     const [currentPage, setCurrentPage] = useState(1);
     const [chcPerPage] = useState(5);
-    // Get Current Products
+    // Get Current tickets
     const indexOfLastChc = currentPage * chcPerPage;
     const indexOfFirstChc = indexOfLastChc - chcPerPage;
      const currentChc = filteredChc.slice(
@@ -115,25 +115,27 @@ const ChcList = () => {
         <p>There are <b>{filteredChc.length}</b> Total Tickets</p>
             <div className="--flex-between">
         <Search value={search} onChange={(e) => setSearch(e.target.value)}/>
-        <div style={{"paddingLeft":"20px"}}>
-        <Link  to="/add-chc/ADD">
-        <button type="button" className="--btn --btn-primary">
-            Add Ticket
-            </button>
-            </Link >
-            </div>
 
-            <div className={styles.sort}>
+        <div style={{"paddingLeft":"20px"}}>
+        <div className={styles.sort}>
           <label>Priority:</label>
           <select value={sort} onChange={(e) => setSort(e.target.value)}>
             <option value="all">All</option>
             <option value="high">High</option>
             <option value="normal">Normal</option>
             <option value="low">Low</option>
-            
           </select>
+          </div>
+          </div>
+          
+        <Link  to="/add-chc/ADD">
+        <button type="button" className="--btn --btn-primary">
+            Add Ticket
+        </button>
+        </Link >
         </div>
-        </div>
+
+
 
 
         {filteredChc.length === 0 ? (
@@ -152,17 +154,17 @@ const ChcList = () => {
                             <div>
                        <b>Customer Name:</b> {chc.customername}<br/>
                        <b>Email:</b>  {chc.email}<br/>
-                       <b>Phone Number:</b> {chc.phonenumber}<br/>
+                       <b>Phone Number:</b> {chc.Phonenumber}<br/>
                        </div>
                        <div className={styles.btnarea}>         
-                        Priority: {chc.priority}<br/>
-                        <span className={userid==="mcrYtiHdAZeUTx3rrm0eIzVVrYi2"?"":styles.dnone}>
+                        Priority: {chc.priority}<br/> <br/> <br/> 
+                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        <span>
                        <Link to={`/add-chc/${chc.id}`}>
                         <FaEdit size={20} color="green" />
                       </Link>
-                      &nbsp;
-                   
-                     
+                      &nbsp; &nbsp; &nbsp;
+                             
                       <FaTrashAlt
                         size={18}
                         color="red"
@@ -177,13 +179,14 @@ const ChcList = () => {
                         <br/>
                         <div className='--flex-between'>
                         <div><b>Date Created</b>: {formattedDate}<br/></div>
-                        <div> <Link to={`/chc-details/${chc.id}`}>
+                        <div>
+                          <Link to={`/chc-details/${chc.id}`}>
                             <button type="button" className="--btn --btn-primary">
                              View Detials
-                        </button>
+                            </button>
                          </Link>
-            </div>
-            </div>
+                        </div>
+                        </div>
 
                     </Card>
                  

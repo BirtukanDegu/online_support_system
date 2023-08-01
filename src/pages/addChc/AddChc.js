@@ -15,13 +15,14 @@ import useFetchCollection from "../../customHooks/useFetchCollection";
 const initialState = {
   customername: "",
   email: "",
-  phonenumber: "",
+  Phonenumber: "",
   priority:"",
   desc: "",
+  // createdby: "",
 };
 
 const  AddChc =  () => {
-    const userID=useSelector(selectUserID)
+    const userid=useSelector(selectUserID)
   const { id } = useParams();
    //const chcData =  useSelector(selectChcData);
    
@@ -72,9 +73,10 @@ const  AddChc =  () => {
       const docRef = addDoc(collection(db, "user_ticket_data"), {
         customername: chc.customername,
         email: chc.email,
-        Phonenumber: chc.phonenumber,
+        Phonenumber: chc.Phonenumber,
         desc: chc.desc,
         priority:chc.priority,
+        // createdby:chc.userid,
         createdAt: Timestamp.now().toDate(),
       });
       
@@ -94,12 +96,13 @@ const  AddChc =  () => {
 
    
     try {
-      setDoc(doc(db, "chc", id), {
+      setDoc(doc(db, "user_ticket_data"), {
         customername: chc.customername,
         email: chc.email,
-        phonenumber: chc.phonenumber,
+        Phonenumber: chc.Phonenumber,
         desc: chc.desc,
         priority:chc.priority,
+        // createdby:chc.userid,
         createdAt: chc.createdAt,
         editedAt: Timestamp.now().toDate(),
       });
@@ -151,8 +154,8 @@ const  AddChc =  () => {
               type="number"
               placeholder="Phone Number"
               required
-              name="phonenumber"
-              value={chc.phonenumber}
+              name="Phonenumber"
+              value={chc.Phonenumber}
               onChange={(e) => handleInputChange(e)}
             />
 

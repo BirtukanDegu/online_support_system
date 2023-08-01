@@ -35,7 +35,7 @@ const chcAddSlice = createSlice({
              const tempProducts = data.filter(
               (chc) =>
                 chc.customername.toLowerCase().includes(search.toLowerCase()) ||
-                chc.phonenumber.toLowerCase().includes(search.toLowerCase())
+                chc.Phonenumber.toLowerCase().includes(search.toLowerCase())
             );
       
             state.filteredChc = tempProducts;
