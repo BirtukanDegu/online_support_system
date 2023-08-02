@@ -116,8 +116,8 @@ const AdminPage = () => {
             <div className="--flex-between">
         <Search value={search} onChange={(e) => setSearch(e.target.value)}/>
 
-
-            <div className={styles.sort}>
+      
+            <div className={styles.sort}> 
           <label>Priority:</label>
           <select value={sort} onChange={(e) => setSort(e.target.value)}>
             <option value="all">All</option>
