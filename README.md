@@ -7,7 +7,7 @@ Application has two roles: 1.User 2.Admin
 
 use Email: admin@admin.com & Password: admin@admin.com   to login to admin page
 
-User can Create new ticket and see all their tickets.
+User can Create, Edit and Delete tickets and see all their tickets.
 
 Admin can visit other user's tickets and also can delete them.
 
