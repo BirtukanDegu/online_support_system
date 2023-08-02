@@ -17,6 +17,8 @@ If the last message in chat is an admin message then ticket has opened.
 
 Everything related to backend has been handled with firebase.
 
+## Demo: 
+https://main--teal-peony-bc40dd.netlify.app
 
 # DEFUALT README
 
