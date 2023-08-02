@@ -149,21 +149,15 @@ const AdminPage = () => {
                        <b>Phone Number:</b> {chc.Phonenumber}<br/>
                        </div>
                        <div className={styles.btnarea}>         
-                        Priority: {chc.priority}<br/>
-                        <span className={userID==="mcrYtiHdAZeUTx3rrm0eIzVVrYi2"?"":styles.dnone}>
-                       <Link to={`/admin-page/${chc.id}`}>
-                        <FaEdit size={20} color="green" />
-                      </Link>
-                      &nbsp;
-                   
-                     
+                        Priority: {chc.priority}<br/> <br/> <br/> 
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                             
                       <FaTrashAlt
                         size={18}
                         color="red"
                         onClick={() => confirmDelete(chc.id)}
                        
                       />
-                      </span>
                      
                        </div>
 
