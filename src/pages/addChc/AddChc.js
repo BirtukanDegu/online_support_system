@@ -76,7 +76,7 @@ const  AddChc =  () => {
         Phonenumber: chc.Phonenumber,
         desc: chc.desc,
         priority:chc.priority,
-        // createdby:chc.userid,
+        createdby:userid,
         createdAt: Timestamp.now().toDate(),
       });
       
@@ -96,13 +96,13 @@ const  AddChc =  () => {
 
    
     try {
-      setDoc(doc(db, "user_ticket_data"), {
+      setDoc(doc(db, "user_ticket_data", id), {
         customername: chc.customername,
         email: chc.email,
         Phonenumber: chc.Phonenumber,
         desc: chc.desc,
         priority:chc.priority,
-        // createdby:chc.userid,
+        createdby:chc.userid,
         createdAt: chc.createdAt,
         editedAt: Timestamp.now().toDate(),
       });
