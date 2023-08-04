@@ -22,11 +22,11 @@ const AddComment = ({id}) => {
   //const products = useSelector(selectProducts);
   const userID = useSelector(selectUserID);
   const userName = useSelector(selectUserName);
-  const [chcData, setChcData] = useState(null);
+  const [ticketData, setTicketData] = useState(null);
   
 
   useEffect(() => {
-    setChcData(document);
+    setTicketData(document);
   }, [document]);
   
 
@@ -39,7 +39,7 @@ const AddComment = ({id}) => {
     const reviewConfig = {
       userID,
       userName,
-      chcID: id,
+      ticketID: id,
        comment,
      commentDate: date,
       createdAt: Timestamp.now().toDate(),
@@ -58,12 +58,12 @@ const AddComment = ({id}) => {
     <section>
       <div className={styles.review}>
      
-        {chcData === null ? (
+        {ticketData === null ? (
           <img src={spinnerImg} alt="Loading..." style={{ width: "50px" }} />
         ) : (
           <>
             {/* <p>
-              <b>Product name:</b> {chcData.companyname}
+              <b>Product name:</b> {ticketData.companyname}
             </p> */}
             
           </>

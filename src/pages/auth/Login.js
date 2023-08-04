@@ -24,7 +24,7 @@ const Login = () => {
 
   const redirectUser = () => {
   
-    navigate("/chc-list");
+    navigate("/ticket-list");
   };
 
   const loginUser = (e) => {

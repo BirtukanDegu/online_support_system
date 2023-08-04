@@ -4,37 +4,37 @@ import { Link} from 'react-router-dom';
 import Search from '../../component/search/Search';
 import useFetchCollection from '../../customHooks/useFetchCollection';
 import { selectIsLoggedIn, selectUserID  } from "../../redux/authSlice";
-import styles from "./ChcList.module.scss";
+import styles from "./ticketList.module.scss";
 import { deleteDoc, doc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { db } from "../../firebase/config";
 import Loader from "../../component/loader/Loader";
 import Notiflix from "notiflix";
-import { FILTER_BY_SEARCH, selectChcData, selectFiltertedChc, SORT_CHC, STORE_CHC } from '../../redux/chcAddSlice';
+import { FILTER_BY_SEARCH, selectTicketData, selectFiltertedTicket, SORT_TICKET, STORE_TICKET } from '../../redux/ticketAddSlice';
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import Card from '../../component/card/Card';
 import Pagination from '../../component/pagination/Pagination';
 import * as XLSX from 'xlsx';
 
 
-const ChcList = () => {
+const TicketList = () => {
     const isLoggedIn = useSelector(selectIsLoggedIn);
-    const userid=useSelector(selectUserID)
+    const userid = useSelector(selectUserID);
     const { data, isLoading } = useFetchCollection("user_ticket_data");
-       const [sort, setSort] = useState("all");
+    const [sort, setSort] = useState("all");
     const [search, setSearch] = useState("");
-     const chcData = useSelector(selectChcData);
-     const [downloadUrl, setDownloadUrl] = useState('');
-   const filteredChc = useSelector(selectFiltertedChc);
+    const ticketData = useSelector(selectTicketData);
+    const [downloadUrl, setDownloadUrl] = useState('');
+    const filteredTicket = useSelector(selectFiltertedTicket);
     // Pagination states
     const [currentPage, setCurrentPage] = useState(1);
-    const [chcPerPage] = useState(5);
+    const [ticketPerPage] = useState(5);
     // Get Current tickets
-    const indexOfLastChc = currentPage * chcPerPage;
-    const indexOfFirstChc = indexOfLastChc - chcPerPage;
-     const currentChc = filteredChc.slice(
-      indexOfFirstChc,
-      indexOfLastChc
+    const indexOfLastTicket = currentPage * ticketPerPage;
+    const indexOfFirstTicket = indexOfLastTicket - ticketPerPage;
+     const currentTicket = filteredTicket.slice(
+      indexOfFirstTicket,
+      indexOfLastTicket
     );  
   
     const firebaseData =data;
@@ -52,8 +52,8 @@ const ChcList = () => {
   
   useEffect(() => {
     dispatch(
-        STORE_CHC({
-            chc:data
+        STORE_TICKET({
+            ticket:data
       })
      
     );
@@ -62,7 +62,7 @@ const ChcList = () => {
   
   
   useEffect(() => {
-    dispatch(SORT_CHC({ data, sort }));
+    dispatch(SORT_TICKET({ data, sort }));
   }, [dispatch, data, sort]); 
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const ChcList = () => {
       "Delete",
       "Cancel",
       function okCb() {
-        deleteChc(id, imageURL);
+        deleteTicket(id, imageURL);
       },
       function cancelCb() {
         console.log("Delete Canceled");
@@ -91,7 +91,7 @@ const ChcList = () => {
     );
   };
 
-  const deleteChc = async (id) => {
+  const deleteTicket = async (id) => {
     try {
       await deleteDoc(doc(db, "user_ticket_data", id));
 
@@ -112,7 +112,7 @@ const ChcList = () => {
         <section>
         <div className="container">
         <h2>Ticket List</h2>
-        <p>There are <b>{filteredChc.length}</b> Total Tickets</p>
+        <p>There are <b>{filteredTicket.length}</b> Total Tickets</p>
             <div className="--flex-between">
         <Search value={search} onChange={(e) => setSearch(e.target.value)}/>
 
@@ -128,7 +128,7 @@ const ChcList = () => {
           </div>
           </div>
           
-        <Link  to="/add-chc/ADD">
+        <Link  to="/add-ticket/ADD">
         <button type="button" className="--btn --btn-primary">
             Add Ticket
         </button>
@@ -138,29 +138,29 @@ const ChcList = () => {
 
 
 
-        {filteredChc.length === 0 ? (
+        {filteredTicket.length === 0 ? (
           <p>No Ticket found.</p>
         ) :
         (
-            <>  {currentChc.map((chc, index) => {
-        const timestamp = chc.createdAt;
+            <>  {currentTicket.map((ticket, index) => {
+        const timestamp = ticket.createdAt;
         const date = new Date(timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000);
         const formattedDate = date.toLocaleString();
                 
                 return (
 
-                    <Card key={chc.id} cardClass={styles.card}>
+                    <Card key={ticket.id} cardClass={styles.card}>
                         <div className={styles.flexbetween}>
                             <div>
-                       <b>Customer Name:</b> {chc.customername}<br/>
-                       <b>Email:</b>  {chc.email}<br/>
-                       <b>Phone Number:</b> {chc.Phonenumber}<br/>
+                       <b>Customer Name:</b> {ticket.customername}<br/>
+                       <b>Email:</b>  {ticket.email}<br/>
+                       <b>Phone Number:</b> {ticket.Phonenumber}<br/>
                        </div>
                        <div className={styles.btnarea}>         
-                        Priority: {chc.priority}<br/> <br/> <br/> 
+                        Priority: {ticket.priority}<br/> <br/> <br/> 
                       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                         <span>
-                       <Link to={`/add-chc/${chc.id}`}>
+                       <Link to={`/add-ticket/${ticket.id}`}>
                         <FaEdit size={20} color="green" />
                       </Link>
                       &nbsp; &nbsp; &nbsp;
@@ -168,7 +168,7 @@ const ChcList = () => {
                       <FaTrashAlt
                         size={18}
                         color="red"
-                        onClick={() => confirmDelete(chc.id)}
+                        onClick={() => confirmDelete(ticket.id)}
                        
                       />
                       </span>
@@ -180,7 +180,7 @@ const ChcList = () => {
                         <div className='--flex-between'>
                         <div><b>Date Created</b>: {formattedDate}<br/></div>
                         <div>
-                          <Link to={`/chc-details/${chc.id}`}>
+                          <Link to={`/ticket-details/${ticket.id}`}>
                             <button type="button" className="--btn --btn-primary">
                              View Detials
                             </button>
@@ -197,14 +197,14 @@ const ChcList = () => {
 <Pagination
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
-          chcPerPage={chcPerPage}
-          totalChc={filteredChc.length}
+          ticketPerPage={ticketPerPage}
+          totalTicket={filteredTicket.length}
         />
 
 <div>
       {downloadUrl && (
         <button type="button" className="--btn --btn-primary">
-    <a href={downloadUrl} download="chc-data.xlsx" style={{"color":"#fff"}}>
+    <a href={downloadUrl} download="ticket-data.xlsx" style={{"color":"#fff"}}>
           
            Download Ticket XLS</a>
         </button>
@@ -246,4 +246,4 @@ const ChcList = () => {
   
 }
 
-export default ChcList
+export default TicketList

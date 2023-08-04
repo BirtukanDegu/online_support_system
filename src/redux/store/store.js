@@ -1,10 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import authReducer from "../authSlice";
-import chcReducer from "../chcAddSlice";
+import ticketReducer from "../ticketAddSlice";
 
 
 const rootReducer = combineReducers({
-  chc:chcReducer,
+  ticket:ticketReducer,
   auth: authReducer,
 });
 

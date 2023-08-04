@@ -4,21 +4,21 @@ import useFetchDocument from "../../customHooks/useFetchDocument";
 import useFetchCollection from "../../customHooks/useFetchCollection";
 import spinnerImg from "../../assets/spinner.jpg";
 import Card from "../../component/card/Card";
-import styles from "./ChcDetails.module.scss";
+import styles from "./ticketDetail.module.scss";
 import AddComment from "../../component/addComment/AddComment";
 
-const ChcDetails = () => {
+const TicketDetails = () => {
     const { id } = useParams();
-  const [chcData, setChcData] = useState(null);
+  const [ticketData, setTicketData] = useState(null);
  
    const { document } = useFetchDocument("user_ticket_data", id);
   const { data } = useFetchCollection("comment");
-  const filteredComment = data.filter((comment) => comment.chcID === id);
+  const filteredComment = data.filter((comment) => comment.ticketID === id);
   
  
  
   useEffect(() => {
-    setChcData(document);
+    setTicketData(document);
    
      
   }, [document]);
@@ -34,9 +34,9 @@ const ChcDetails = () => {
       <div className={`container`}>
       <h2>Ticket Details</h2>
         <div>
-          <Link to="/chc-list">&larr; Back To Ticket Page</Link>
+          <Link to="/ticket-list">&larr; Back To Ticket Page</Link>
         </div>
-        {chcData === null ? (
+        {ticketData === null ? (
           <img src={spinnerImg} alt="Loading" style={{ width: "50px" }} />
           
         ) : (
@@ -45,15 +45,15 @@ const ChcDetails = () => {
                           <Card cardClass={styles.card}>
                         <div className={styles.flexbetween}>
                             <div>
-                       <b>Customer Name:</b> {chcData.customername}<br/>
-                       <b>Email:</b>  {chcData.email}<br/>
-                       <b>Phone Number:</b> {chcData.Phonenumber}<br/>
-                         <b>Date Created</b>: {chcData.createdAt.toDate().toLocaleString()}<br/>
+                       <b>Customer Name:</b> {ticketData.customername}<br/>
+                       <b>Email:</b>  {ticketData.email}<br/>
+                       <b>Phone Number:</b> {ticketData.Phonenumber}<br/>
+                         <b>Date Created</b>: {ticketData.createdAt.toDate().toLocaleString()}<br/>
                        </div>
                        <div className={styles.btnarea}>
 
                         
-                        Priority: {chcData.priority}<br/>
+                        Priority: {ticketData.priority}<br/>
                         
                      
                        </div>
@@ -61,7 +61,7 @@ const ChcDetails = () => {
                         </div>
                         <br/>
                         <div className='--flex-between'>
-                        <div><b>Description:</b> {chcData.desc}<br/></div>
+                        <div><b>Description:</b> {ticketData.desc}<br/></div>
                         
             </div>
 
@@ -105,7 +105,7 @@ const ChcDetails = () => {
             
 
                     </Card>
-                    <AddComment id={chcData.id}/>
+                    <AddComment id={ticketData.id}/>
             </>
             
         )
@@ -116,4 +116,4 @@ const ChcDetails = () => {
   )
 }
 
-export default ChcDetails
+export default TicketDetails

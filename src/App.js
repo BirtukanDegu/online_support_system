@@ -2,12 +2,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./component/header/Header";
-import AddChc from "./pages/addChc/AddChc";
+import AddTicket from "./pages/addTicket/AddTicket";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Reset from "./pages/auth/Reset";
-import ChcDetails from "./pages/chcDetail/ChcDetails";
-import ChcList from "./pages/chcList/ChcList";
+import TicketDetails from "./pages/ticketDetail/ticketDetail";
+import TicketList from "./pages/ticketList/ticketList";
 import Home from "./pages/home/Home";
 import NotFound from "./pages/notFound/NotFound";
 import { Provider } from "react-redux";
@@ -32,10 +32,10 @@ function App() {
           <Route path ="/reset" element={<Reset />} />
        
           
-            <Route path="/chc-list" element={<ChcList />} />
+            <Route path="/ticket-list" element={<TicketList />} />
             <Route path="/admin-page" element={<AdminPage />} />
-            <Route path="/add-chc/:id" element={<AddChc />} />
-            <Route path="/chc-details/:id" element={<ChcDetails />} />
+            <Route path="/add-ticket/:id" element={<AddTicket />} />
+            <Route path="/ticket-details/:id" element={<TicketDetails />} />
             <Route path="*" element={<NotFound />} />
           
          

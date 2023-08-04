@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { db } from "../../firebase/config";
 import Card from "../../component/card/Card";
 import Loader from "../../component/loader/Loader";
-import styles from "./AddChc.module.scss";
+import styles from "./AddTicket.module.scss";
 import { selectUserID } from "../../redux/authSlice";
 import useFetchCollection from "../../customHooks/useFetchCollection";
 
@@ -21,27 +21,27 @@ const initialState = {
   // createdby: "",
 };
 
-const  AddChc =  () => {
+const  AddTicket =  () => {
     const userid=useSelector(selectUserID)
   const { id } = useParams();
-   //const chcData =  useSelector(selectChcData);
+   //const ticketData =  useSelector(selectTicketData);
    
    const { data } = useFetchCollection("user_ticket_data");
   
-  //const chcData = data;
-  const chcEdit = data.find((item) => item.id === id);
+  //const ticketData = data;
+  const ticketEdit = data.find((item) => item.id === id);
   
   
  
-    const [chc, setChc] = useState({}); 
+    const [ticket, setTicket] = useState({}); 
   
  useEffect(() => {
    
-        const newState =  detectForm(id, { ...initialState }, chcEdit);
-                setChc(newState)
+        const newState =  detectForm(id, { ...initialState }, ticketEdit);
+                setTicket(newState)
         
       
- }, [ chcEdit,id])
+ }, [ ticketEdit,id])
  
 
 
@@ -58,84 +58,84 @@ const  AddChc =  () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setChc({ ...chc, [name]: value });
+    setTicket({ ...ticket, [name]: value });
     
   };
 
   
 
-  const addChc = (e) => {
+  const AddTicket = (e) => {
     e.preventDefault();
     // console.log(product);
     setIsLoading(true);
 
     try {
       const docRef = addDoc(collection(db, "user_ticket_data"), {
-        customername: chc.customername,
-        email: chc.email,
-        Phonenumber: chc.Phonenumber,
-        desc: chc.desc,
-        priority:chc.priority,
+        customername: ticket.customername,
+        email: ticket.email,
+        Phonenumber: ticket.Phonenumber,
+        desc: ticket.desc,
+        priority:ticket.priority,
         createdby:userid,
         createdAt: Timestamp.now().toDate(),
       });
       
-      setChc({ ...initialState });
+      setTicket({ ...initialState });
 
       toast.success("Ticket Added successfully.");
-      navigate("/chc-list");
+      navigate("/ticket-list");
     } catch (error) {
       setIsLoading(false);
       toast.error(error.message);
     }
   };
 
-  const editChc = (e) => {
+  const editTicket = (e) => {
     e.preventDefault();
     setIsLoading(true);
 
    
     try {
       setDoc(doc(db, "user_ticket_data", id), {
-        customername: chc.customername,
-        email: chc.email,
-        Phonenumber: chc.Phonenumber,
-        desc: chc.desc,
-        priority:chc.priority,
-        createdby:chc.userid,
-        createdAt: chc.createdAt,
+        customername: ticket.customername,
+        email: ticket.email,
+        Phonenumber: ticket.Phonenumber,
+        desc: ticket.desc,
+        priority:ticket.priority,
+        createdby:userid,
+        createdAt: ticket.createdAt,
         editedAt: Timestamp.now().toDate(),
       });
       setIsLoading(false);
       toast.success("Ticket Edited Successfully");
-      navigate("/chc-list");
+      navigate("/ticket-list");
     } catch (error) {
       setIsLoading(false);
       toast.error(error.message);
     }
   };
-  console.log(chc)
+  console.log(ticket)
   return (
     <section>
         <div className="container">
         <div>
-          <Link to="/chc-list">&larr; Back To Ticket Page</Link>
+          <Link to="/ticket-list">&larr; Back To Ticket Page</Link>
         </div>
 
       {isLoading && <Loader />}
-      {chc?
+      {ticket?
     (
         <div className={styles.product}>
         <h2>{detectForm(id, "Add Ticket", "Edit Ticket")}</h2>
         <Card cardClass={styles.card}>
-          <form onSubmit={detectForm(id, addChc, editChc)}>
+          <form onSubmit={detectForm(id, AddTicket, editTicket)}>
             <label>Customer Name:</label>
             <input
               type="text"
               placeholder="Customer Name"
               required
               name="customername"
-              value={chc.customername}
+              value={ticket.customername}
               onChange={(e) => handleInputChange(e)}
             />
 
@@ -145,7 +145,7 @@ const  AddChc =  () => {
               placeholder="Email"
               required
               name="email"
-              value={chc.email}
+              value={ticket.email}
               onChange={(e) => handleInputChange(e)}
             />
 
@@ -155,7 +155,7 @@ const  AddChc =  () => {
               placeholder="Phone Number"
               required
               name="Phonenumber"
-              value={chc.Phonenumber}
+              value={ticket.Phonenumber}
               onChange={(e) => handleInputChange(e)}
             />
 
@@ -165,7 +165,7 @@ const  AddChc =  () => {
             <select
               required
               name="priority"
-              value={chc.priority}
+              value={ticket.priority}
               onChange={(e) => handleInputChange(e)}
             >
               <option value="" disabled>
@@ -187,7 +187,7 @@ const  AddChc =  () => {
       
          
             </select>
-            {chc.priority==="high"?<p>Kindly Note High Priority Ticket Will be Resolved First Come First Serve Basis </p>:null}
+            {ticket.priority==="high"?<p>Kindly Note High Priority Ticket Will be Resolved First Come First Serve Basis </p>:null}
            
            
 
@@ -195,7 +195,7 @@ const  AddChc =  () => {
             <textarea
               name="desc"
               required
-              value={chc.desc}
+              value={ticket.desc}
               onChange={(e) => handleInputChange(e)}
               cols="30"
               rows="10"
@@ -215,4 +215,4 @@ const  AddChc =  () => {
   );
 };
 
-export default AddChc;
+export default AddTicket;

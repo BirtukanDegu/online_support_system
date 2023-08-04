@@ -4,11 +4,11 @@ import styles from "./Pagination.module.scss";
 const Pagination = ({
   currentPage,
   setCurrentPage,
-  chcPerPage,
-  totalChc,
+  ticketPerPage,
+  totalTicket,
 }) => {
   const pageNumbers = [];
-  const totalPages = totalChc / chcPerPage;
+  const totalPages = totalTicket / ticketPerPage;
   // Limit the page Numbers shown
   const [pageNumberLimit] = useState(5);
   const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
@@ -39,7 +39,7 @@ const Pagination = ({
     }
   };
 
-  for (let i = 1; i <= Math.ceil(totalChc / chcPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalTicket / ticketPerPage); i++) {
     pageNumbers.push(i);
   }
   
