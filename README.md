@@ -19,7 +19,7 @@ Everything related to backend has been handled with firebase.
 
 ## Demo: 
 
-https://main--teal-peony-bc40dd.netlify.app/
+https://online-support-system.netlify.app/
 
 # DEFUALT README
 
